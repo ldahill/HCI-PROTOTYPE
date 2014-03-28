@@ -170,7 +170,7 @@ $("#playbutton").on("click", function(){
     console.log("Play clicked");
     $(this).removeAttr("id");
     $(this).attr("id","pausebutton");
-    $(this).html("Pause");
+    $(this).html("<p> Pause </p>");
 });
 
 //click causes playing song to be paused
@@ -178,7 +178,7 @@ $("#pausebutton").on("click", function(){
     console.log("Pause clicked");
     $(this).removeAttr("id");
     $(this).attr("id","playbutton");
-    $(this).html("Pause");
+    $(this).html("<p> Play </p>");
 });
 
 $("#fwdbutton").on("click", function(){
