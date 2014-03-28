@@ -33,7 +33,9 @@ var explore = {"categories":{"audio":["Popular+Audio","Audiobooks","Business","C
 //https://api-web.soundcloud.com/explore/deep%2Bhouse?tag=uniform-time-decay-experiment%3A6%3A1392943040&limit=10&offset=0&linked_partitioning=1
 //https://api-web.soundcloud.com/explore/deep%2Bhouse?offset=10&tag=uniform-time-decay-experiment%3A6%3A1392943040&limit=10
 //https://api-web.soundcloud.com/explore/Popular%20Music?tag=uniform-time-decay-experiment%3A6%3A1392943040&limit=10&offset=0&linked_partitioning=1
+function gettracks(){
 
+}
 function buildlist1(){
     for (var i = exploreoffset; i < mainlist.length; i++) {
         $('#list1').append('<li><p> ' + mainlist[i]['title'] + 
@@ -146,8 +148,7 @@ function processdata(data){
 $(document).ready(function() {
     mainlist = new Array();
     queue = new Array();
-    addgenretags();
-    gettrendingSCtracks(exploreGenre, 15, exploreoffset);
+    gettracks();
  
  /*   SC.get('/tracks', { streamable: true, genres: 'rock' }, function(tracks) {
         $(tracks).each(function(index, track) {
@@ -167,6 +168,7 @@ $(document).ready(function() {
         }
     });
 });
+
 $(window).resize(function(){
     var col1 = $('#list1div');
     var col2 = $('#list2div');
@@ -185,10 +187,9 @@ $(window).resize(function(){
 $(document).on('click', '#list1 li', function(){
     var list2 = $('#list2');    
     console.log("SEAFASDSA")
-    if (mainlist[$(this).index()]['isqd'] == false){
+    if($(this).attr("title") != "true"){}
         list2.append($(this).clone());
-        queue.push(mainlist[$(this).index()]); 
-        mainlist[$(this).index()]['isqd'] = true;
+        $(this).attr("title", "true");
         $(window).trigger('resize');
     } 
 });
@@ -204,13 +205,6 @@ $('#list1').on('scroll', function() {
         gettrendingSCtracks(exploreGenre, 15, exploreoffset);
     }
 })
-$("#dropdown").on("click","#genre",function(){
-    exploreGenre = $(this).text();
-    mainlist = [];
-    $("#list1").empty();
-    exploreoffset = 0;
-    gettrendingSCtracks(exploreGenre, 15, exploreoffset);
-});
 
 //click causes playing to skip to prev track
 $("#backbutton").on("click", function(){
