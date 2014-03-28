@@ -1,47 +1,8 @@
-
-//mainlist is a list of objects corresponding to tracks taken from
-//soundcloud. Fields for the object: {title, username, id, isqd}, wher
-//username refers to the soundcloud user who uploaded the track, id refers
-//to the song id used to stream the song from soundcloud, and isqd is 
-//a boolean that is true when the object has been added to the queue.
-var mainlist;
-var queue;
-var clientid = '4049f4856a7eee5b403bdbed54734a09';
 var isstreaming = false;
-var exploreGenre = "Popular Music";
-var exploreoffset = 0;
 var now_playing_index = 0;
 var displaying = "songs";
 
-
-//Below is a JSON of all categories used for SoundCloud Explore. Retrieved from:
-//https://api.soundcloud.com/explore/v2?limit=10&offset=0&linked_partitioning=1&client_id=4049f4856a7eee5b403bdbed54734a09
-//{"categories":{"audio":["Popular+Audio","Audiobooks","Business","Comedy","Entertainment","Learning","News+%26+Politics","Religion+%26+Spirituality","Science","Sports","Storytelling","Technology"],
-//               "music":["Popular+Music","Alternative+Rock","Ambient","Blues","Classical","Country","Dance","Deep+House","Disco","Drum+%26+Bass","Dubstep","Electro","Electronic","Folk","Hardcore+Techno","Hip+Hop","House","Indie+Rock","Jazz","Latin","Metal","Minimal+Techno","Mixtape","Piano","Pop","Progressive+House","Punk","R%26B","Rap","Reggae","Rock","Singer-Songwriter","Soul","Tech+House","Techno","Trance","Trap","Trip+Hop","World"]},
-//              "tag":"uniform-time-decay-experiment:1:1393436807",
-//               "took":"278.206us"}
-//This is the query not using my client_id but taking what was used by sc/explore
-var explore = {"categories":{"audio":["Popular+Audio","Audiobooks","Business","Comedy","Entertainment","Learning","News+%26+Politics","Religion+%26+Spirituality","Science","Sports","Storytelling","Technology"],
-                            "music":["Popular+Music","Alternative+Rock","Ambient","Blues","Classical","Country","Dance","Deep+House","Disco","Drum+%26+Bass","Dubstep","Electro","Electronic","Folk","Hardcore+Techno","Hip+Hop","House","Indie+Rock","Jazz","Latin","Metal","Minimal+Techno","Mixtape","Piano","Pop","Progressive+House","Punk","R%26B","Rap","Reggae","Rock","Singer-Songwriter","Soul","Tech+House","Techno","Trance","Trap","Trip+Hop","World"]},
-               "tag":"uniform-time-decay-experiment:6:1393437049",
-               "took":"286.701us"};
-
-//Below is an example of an explore retrieval. It gets the first 10 most popular
-//Deep House sounds. Below that is a retrieval that gets the next 10.
-//https://api-web.soundcloud.com/explore/deep%2Bhouse?tag=uniform-time-decay-experiment%3A6%3A1392943040&limit=10&offset=0&linked_partitioning=1
-//https://api-web.soundcloud.com/explore/deep%2Bhouse?offset=10&tag=uniform-time-decay-experiment%3A6%3A1392943040&limit=10
-//https://api-web.soundcloud.com/explore/Popular%20Music?tag=uniform-time-decay-experiment%3A6%3A1392943040&limit=10&offset=0&linked_partitioning=1
-function gettracks(){
-
-}
-/*function buildlist1(){
-    for (var i = exploreoffset; i < mainlist.length; i++) {
-        $('#list1').append('<li><p> ' + mainlist[i]['title'] + 
-        ' <small>' + mainlist[i]['username'] + '</small></p></li>');
-    }
-
-}
-
+/*
 function playSound(soundindex){
     console.log(soundindex);
     if (queue[soundindex]['isplaying']===false){
@@ -80,82 +41,14 @@ function playSound(soundindex){
         $('#list2 li').eq(now_playing_index).removeClass("playing").addClass("paused");
     }
     now_playing_index = soundindex;
-}
-
-function addgenretags(){
-    for (var i = 0; i < explore['categories']['music'].length; i++){
-        $('#dropdown ul').append('<li id="genre"><p> ' + 
-          decodeURIComponent(explore['categories']['music'][i]).replace("+"," ") 
-          + '</p></li>');
-    }
 }*/
 
-function IsJsonString(str) {
-    try {
-        JSON.parse(str);
-    } catch (e) {
-        return false;
-    }
-    return true;
-}
-/*
-function  gettrendingSCtracks(genre, limit, offset){
-    var genretag = encodeURIComponent(genre);
-    var phpurl = "getexplore.php/?genre=" + genretag + "&limit=" + limit +
-                 "&offset=" + offset;
-    $.getJSON(phpurl, function(data){
-        dataparsed = JSON.parse(data);
-        $(dataparsed["tracks"]).each(function(index, track) {
-            console.log(index, track);
-            mainlist.push({title: track.title, username: track.user['username'],
-                           id: track.id, url: track.stream_url, isqd: false,
-                           isplaying: false});
-        });
-        buildlist1();
-        exploreoffset += limit;
-        $(window).trigger('resize');
-    })
-}
-*/
-function createCORSrequest(method, url){
-    var xhr = new XMLHttpRequest();
-    if ("withCredentials" in xhr) {
-        // Check if the XMLHttpRequest object has a "withCredentials" property.
-        // "withCredentials" only exists on XMLHTTPRequest2 objects.
-        xhr.open(method, url, true);
-    } 
-    else if (typeof XDomainRequest != "undefined") {
-        // Otherwise, check if XDomainRequest.
-        // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-        xhr = new XDomainRequest();
-        xhr.open('GET', url);
-
-    } 
-    else {
-        // Otherwise, CORS is not supported by the browser.
-        xhr = null;
-    }
-    xhr.withCredentials = true;
-    return xhr;
-}
-
-function processdata(data){
-    console.log(data);
-}
 
 $(document).ready(function() {
     mainlist = new Array();
     queue = new Array();
     $("#artists").trigger('click');
- 
- /*   SC.get('/tracks', { streamable: true, genres: 'rock' }, function(tracks) {
-        $(tracks).each(function(index, track) {
-            mainlist.push({title: track.title, username: track.user['username'],
-                           id: track.id, url: track.stream_url, isqd: false, isplaying: false});
-        });
-        buildlist1();
-        $(window).trigger('resize');
-    });*/
+
     soundManager.setup({
         url: '/path/to/swf-directory/',
         onready: function() {
@@ -224,16 +117,13 @@ $(document).on('click', '#list1 li', function(){
     }
 });
 
+//Clicking on an element in the play queue will delete it 
 $(document).on('click', '#list2 li', function(){
-    targetindex = $(this).index();
     $(this).remove();
 });
 
-$("#list2 li").dblclick(function(){
-    console.log("DOUBLE CLICK REGISTERED");
-    $(this).remove();
-});
-
+//Below are the event listeners for the Browse Menu's side panel
+//Each one will clear and update the Browse Menu's display
 $("#playlists").on("click", function(){
     console.log("playlists clicked");
     $('#list1').empty();
@@ -280,7 +170,7 @@ $("#playbutton").on("click", function(){
     console.log("Play clicked");
     $(this).removeAttr("id");
     $(this).attr("id","pausebutton");
-    playSound(now_playing_index);
+    $(this).html("Pause");
 });
 
 //click causes playing song to be paused
@@ -288,7 +178,7 @@ $("#pausebutton").on("click", function(){
     console.log("Pause clicked");
     $(this).removeAttr("id");
     $(this).attr("id","playbutton");
-    playSound(now_playing_index);
+    $(this).html("Pause");
 });
 
 $("#fwdbutton").on("click", function(){
