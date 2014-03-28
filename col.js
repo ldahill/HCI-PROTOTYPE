@@ -186,7 +186,7 @@ $(window).resize(function(){
 //mainlist
 $(document).on('click', '#list1 li', function(){
     var list2 = $('#list2');    
-    console.log("SEAFASDSA")
+    console.log("SEAFASDSA");
     if($(this).attr("title") != "true"){
         list2.append($(this).clone());
         $(this).attr("title", "true");
