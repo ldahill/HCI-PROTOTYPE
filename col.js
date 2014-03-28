@@ -230,6 +230,7 @@ $(document).on('click', '#list2 li', function(){
 });
 
 $("#list2 li").dblclick(function(){
+    console.log("DOUBLE CLICK REGISTERED");
     $(this).remove();
 });
 
