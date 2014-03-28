@@ -226,7 +226,7 @@ $(document).on('click', '#list1 li', function(){
 
 $(document).on('click', '#list2 li', function(){
     targetindex = $(this).index();
-    playSound(targetindex);
+    //playSound(targetindex);
 });
 
 $("#list2 li").dblclick(function(){
