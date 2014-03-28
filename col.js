@@ -169,10 +169,10 @@ $("#backbutton").on("click", function(){
 $("#playbutton").on("click", function(){
     console.log("Play clicked");
     htmltext = $(this).html();
-    if( htmltext = "<p> Pause </p>"){
+    if( htmltext == "<p> Pause </p>"){
         $(this).html("<p> Play </p>");
     }
-    if(htmltext = "<p> Play </p>"){
+    if(htmltext == "<p> Play </p>"){
         $(this).html("<p> Pause </p>");
     }
 });
