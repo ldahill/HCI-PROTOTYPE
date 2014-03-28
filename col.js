@@ -146,7 +146,7 @@ function processdata(data){
 $(document).ready(function() {
     mainlist = new Array();
     queue = new Array();
-    $("#songs").trigger('click');
+    $("#artists").trigger('click');
  
  /*   SC.get('/tracks', { streamable: true, genres: 'rock' }, function(tracks) {
         $(tracks).each(function(index, track) {
