@@ -229,9 +229,10 @@ $(document).on('click', '#list2 li', function(){
     playSound(targetindex);
 });
 
-$("#list2 li".dblclick(function(){
+$("#list2 li").dblclick(function(){
     $(this).remove();
 });
+
 $("#playlists").on("click", function(){
     console.log("playlists clicked");
     $('#list1').empty();
