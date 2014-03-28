@@ -193,7 +193,7 @@ $(document).on('click', '#list1 li', function(){
         } 
     }
     else{
-        name = $(this).html();
+        name = $(this p).html();
     }
     if (displaying == "playlists"){
         console.log("ERROR: SITE DOES NOT SUPPORT PLAYLIST BROWSING YET");
