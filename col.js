@@ -187,7 +187,7 @@ $(window).resize(function(){
 $(document).on('click', '#list1 li', function(){
     var list2 = $('#list2');    
     console.log("SEAFASDSA")
-    if($(this).attr("title") != "true"){}
+    if($(this).attr("title") != "true"){
         list2.append($(this).clone());
         $(this).attr("title", "true");
         $(window).trigger('resize');
