@@ -168,9 +168,13 @@ $("#backbutton").on("click", function(){
 //click causes playing song to be paused
 $("#playbutton").on("click", function(){
     console.log("Play clicked");
-    $(this).removeAttr("id");
-    $(this).attr("id","pausebutton");
-    $(this).html("<p> Pause </p>");
+    htmltext = $(this).html();
+    if( htmltext = "<p> Pause </p>"){
+        $(this).html("<p> Play </p>");
+    }
+    if(htmltext = "<p> Play </p>"){
+        $(this).html("<p> Pause </p>");
+    }
 });
 
 //click causes playing song to be paused
